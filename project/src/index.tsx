@@ -6,8 +6,12 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
+const Setup = {
+  PLACE_COUNT: 300,
+};
+
 root.render(
   <React.StrictMode>
-    <App />
+    <App placeCount={Setup.PLACE_COUNT} />
   </React.StrictMode>,
 );
