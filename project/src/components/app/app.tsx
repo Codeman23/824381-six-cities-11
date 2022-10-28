@@ -12,12 +12,10 @@ type AppPlaceCountProps = {
 }
 
 function App( {placeCount} : AppPlaceCountProps ): JSX.Element {
-
   return(
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main} element={<Main placeCount={placeCount} />}/>
-
         <Route path={AppRoute.Favorites}
           element = {
             <PrivateRoute autorizationStatus={AuthorizationStatus.NoAuth}>
