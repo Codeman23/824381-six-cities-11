@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import Main from '../../pages/main/main';
 import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
+import Main from '../../pages/main/main';
 import NotFound from '../../pages/not-found/not-found';
-import Realty from '../../pages/realty/realty';
 import PrivateRoute from '../../components/private-route/private-route';
+import Realty from '../../pages/realty/realty';
 
 type AppPlaceCountProps = {
   placeCount: number;
