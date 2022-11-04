@@ -9,7 +9,6 @@ type FavoriteCardsListProps = {
 }
 
 function FavoriteCardsList( { offers, city }: FavoriteCardsListProps ): JSX.Element {
-
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">

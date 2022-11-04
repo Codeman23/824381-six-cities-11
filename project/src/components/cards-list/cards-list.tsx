@@ -8,7 +8,6 @@ type CardsListProps = {
 }
 
 function CardsList( {offers, cardClassName }: CardsListProps ): JSX.Element {
-
   const [activeCardId, setActiveCardId] = useState(0);
 
   return (
