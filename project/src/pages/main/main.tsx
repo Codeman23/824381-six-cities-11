@@ -1,11 +1,14 @@
+import { CardClassName } from '../../const';
+import { Offer } from '../../types/offer';
+import CardsList from '../../components/cards-list/cards-list';
 import Header from '../../components/header/header';
-import PlaceCard from '../../components/card/card';
 
-type PlaceCountProps = {
+type MainPageProps = {
   placeCount: number;
+  offers: Offer[];
 }
 
-function Main({ placeCount }: PlaceCountProps): JSX.Element {
+function Main({ placeCount, offers }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -68,11 +71,7 @@ function Main({ placeCount }: PlaceCountProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
+                <CardsList offers={offers} cardClassName={CardClassName.Main} />
               </div>
             </section>
             <div className="cities__right-section">

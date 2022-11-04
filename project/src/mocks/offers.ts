@@ -124,7 +124,7 @@ const offers : Offer[] = [
       'https://11.react.pages.academy/static/hotel/7.jpg'
     ],
     title: 'Warm big bed apartment',
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 3,
     type: 'house',
@@ -158,7 +158,7 @@ const offers : Offer[] = [
   },
   {
     city: {
-      name: 'Lagos',
+      name: 'Cape Town',
       location: {
         latitude: 6.5244,
         longitude: 3.3792,
