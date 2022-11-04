@@ -12,4 +12,16 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export { AppRoute, AuthorizationStatus };
+enum CardClassName {
+  Main = 'cities',
+  Favorite = 'favorites'
+}
+
+enum CityType {
+  CapeTown = 'Cape Town',
+  Johannesburg = 'Johannesburg',
+  Nairobi = 'Nairobi',
+  Lagos = 'Lagos'
+}
+
+export { AppRoute, AuthorizationStatus, CardClassName, CityType };
