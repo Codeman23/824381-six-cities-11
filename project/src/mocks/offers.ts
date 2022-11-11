@@ -5,9 +5,9 @@ const offers : Offer[] = [
     city: {
       name: 'Cape Town',
       location: {
-        latitude: 33.9249,
-        longitude: 18.4241,
-        zoom: 13
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 11
       }
     },
     previewImage: 'https://11.react.pages.academy/static/hotel/18.jpg',
@@ -46,9 +46,9 @@ const offers : Offer[] = [
     },
     description: 'Elegant luxury accommodation for 2 people with amazing panoramic views over the Sea.',
     location: {
-      latitude: 33.9248,
-      longitude: 18.4242,
-      zoom: 16
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 11
     },
     id: 1
   },
@@ -56,9 +56,9 @@ const offers : Offer[] = [
     city: {
       name: 'Johannesburg',
       location: {
-        latitude: 26.2041,
-        longitude: 28.0473,
-        zoom: 13
+        latitude: 52.3609553943508,
+        longitude: 4.85309666406198,
+        zoom: 12
       }
     },
     previewImage: 'https://11.react.pages.academy/static/hotel/19.jpg',
@@ -95,9 +95,9 @@ const offers : Offer[] = [
     },
     description: 'The interior pays respect to functional and elegant living while being in line with the latest technology and modern comfort. Airy design combines light and bright colors with rectangular volumes and wooden floors to create an imitable heartwarming effect.',
     location: {
-      latitude: 26.2042,
-      longitude: 28.0474,
-      zoom: 13
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 11
     },
     id: 2
   },
@@ -105,9 +105,9 @@ const offers : Offer[] = [
     city: {
       name: 'Nairobi',
       location: {
-        latitude: 1.2921,
-        longitude: 36.8219,
-        zoom: 13
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198,
+        zoom: 11
       }
     },
     previewImage: 'https://11.react.pages.academy/static/hotel/6.jpg',
@@ -150,9 +150,9 @@ const offers : Offer[] = [
     },
     description: 'Have you ever dreamed of living in a magazine like home? Immerse yourself in a perfect experience of relaxation in this beautiful, luxury, two-story villa..',
     location: {
-      latitude: 1.2920,
-      longitude: 36.8218,
-      zoom: 16
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 11
     },
     id: 3
   },
@@ -160,9 +160,9 @@ const offers : Offer[] = [
     city: {
       name: 'Cape Town',
       location: {
-        latitude: 6.5244,
-        longitude: 3.3792,
-        zoom: 13
+        latitude: 52.3809553943508,
+        longitude: 4.939309666406198,
+        zoom: 12
       }
     },
     previewImage: 'https://11.react.pages.academy/static/hotel/4.jpg',
@@ -206,9 +206,9 @@ const offers : Offer[] = [
     },
     description: 'Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated.',
     location: {
-      latitude: 6.5245,
-      longitude: 3.3793,
-      zoom: 13
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 11
     },
     id: 4
   }

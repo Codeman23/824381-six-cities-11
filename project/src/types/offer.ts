@@ -35,4 +35,4 @@ type Offer = {
   type: string;
 };
 
-export { type Offer };
+export { type Offer, type City };

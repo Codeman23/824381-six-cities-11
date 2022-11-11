@@ -1,19 +1,36 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/offer';
 import { CardClassName, AppRoute } from '../../const';
 
 type CardProps = {
   offer: Offer;
-  setActiveCard: (id: number) => void;
-  activeCardId: number;
+  getActiveCard: ((offer: Offer | undefined) => void) | undefined;
   cardClassName: string;
 }
 
-function Card( { offer, activeCardId, setActiveCard, cardClassName }: CardProps ): JSX.Element {
+function Card( { offer, getActiveCard, cardClassName }: CardProps ): JSX.Element {
   const {id, title, isPremium, isFavorite, previewImage, price, type} = offer;
+  const [buttonState, setButtonState] = useState(isFavorite);
+
+  const onMouseOverHandler = () => {
+    if (getActiveCard) {
+      return getActiveCard(offer);
+    }
+  };
+
+  const onMouseLeaveHandler = () => {
+    if (getActiveCard) {
+      return getActiveCard(undefined);
+    }
+  };
+
+  const buttonClickHandle = () => {
+    setButtonState((prevButtonState) => !prevButtonState);
+  };
 
   return (
-    <article id={String(id)} className={`${cardClassName}__card place-card ${activeCardId === id ? 'active' : ''}`} onMouseOver={ () => setActiveCard(id) }>
+    <article id={String(id)} className={`${cardClassName}__card place-card`} onMouseOver={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler}>
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null }
       <div className={`${cardClassName}__image-wrapper place-card__image-wrapper`}>
         <Link to={AppRoute.Realty}>
@@ -26,7 +43,11 @@ function Card( { offer, activeCardId, setActiveCard, cardClassName }: CardProps 
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`} type="button">
+          <button
+            className={`place-card__bookmark-button ${buttonState ? 'place-card__bookmark-button--active' : ''} button`}
+            type="button"
+            onClick={buttonClickHandle}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
