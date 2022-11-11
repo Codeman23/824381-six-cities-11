@@ -1,7 +1,10 @@
+
+import { useState } from 'react';
 import { CardClassName } from '../../const';
 import { Offer } from '../../types/offer';
 import CardsList from '../../components/cards-list/cards-list';
 import Header from '../../components/header/header';
+import Map from '../../components/map/map';
 
 type MainPageProps = {
   placeCount: number;
@@ -9,6 +12,7 @@ type MainPageProps = {
 }
 
 function Main({ placeCount, offers }: MainPageProps): JSX.Element {
+  const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -71,11 +75,13 @@ function Main({ placeCount, offers }: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <CardsList offers={offers} cardClassName={CardClassName.Main} />
+                <CardsList offers={offers} getActiveCard={setActiveCard} cardClassName={CardClassName.Main} />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map offers={offers} activeCard={activeCard} />
+              </section>
             </div>
           </div>
         </div>
