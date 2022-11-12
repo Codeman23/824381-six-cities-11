@@ -17,13 +17,6 @@ enum CardClassName {
   Favorite = 'favorites'
 }
 
-enum CityType {
-  CapeTown = 'Cape Town',
-  Johannesburg = 'Johannesburg',
-  Nairobi = 'Nairobi',
-  Lagos = 'Lagos'
-}
-
 enum MapIconSize {
   Width = 40,
   Height = 40
@@ -46,4 +39,4 @@ const layerAttribution = '&copy; <a href="https://www.openstreetmap.org/copyrigh
 
 const dateFormat = 'MMMM YYYY';
 
-export { AppRoute, AuthorizationStatus, CardClassName, CityType, MapIconSize, MapIconPosition, RaitingValues, urlMarkerDefault, urlMarkerCurrent, instanceLayer, layerAttribution, dateFormat };
+export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, urlMarkerDefault, urlMarkerCurrent, instanceLayer, layerAttribution, dateFormat };
