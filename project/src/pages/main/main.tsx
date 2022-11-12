@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { CardClassName } from '../../const';
 import { Offer } from '../../types/offer';

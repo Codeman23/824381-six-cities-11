@@ -3,7 +3,7 @@ import useMap from '../../hooks/useMap/useMap';
 import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Offer } from '../../types/offer';
-import { urlMarkerDefault, urlMarkerCurrent } from '../../const';
+import { urlMarkerDefault, urlMarkerCurrent, MapIconSize, MapIconPosition } from '../../const';
 
 type MapProps = {
   offers: Offer[];
@@ -12,14 +12,14 @@ type MapProps = {
 
 const defaultCustomIcon = new Icon({
   iconUrl: urlMarkerDefault,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [MapIconSize.Width, MapIconSize.Height],
+  iconAnchor: [MapIconPosition.X, MapIconPosition.Y]
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: urlMarkerCurrent,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [MapIconSize.Width, MapIconSize.Height],
+  iconAnchor: [MapIconPosition.X, MapIconPosition.Y]
 });
 
 function Map({ offers, activeCard }: MapProps): JSX.Element {
@@ -46,7 +46,7 @@ function Map({ offers, activeCard }: MapProps): JSX.Element {
   });
 
   return (
-    <div className='cities__map' style={{ height: '800px' }} ref={mapRef}></div>
+    <div style={{ height: '100%' }} ref={mapRef}></div>
   );
 }
 
