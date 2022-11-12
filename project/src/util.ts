@@ -1,3 +1,14 @@
+import dayjs from 'dayjs';
+import { RaitingValues } from './const';
+
+/**
+ * Helper function that convert date format
+ * @param date - source date
+ * @param format - date format
+ * @returns formated date
+ */
+const humanizeDate = (date: string, format: string) => dayjs(date).format(format);
+
 /**
  * Helper function that group array of objects by value of object property
  * @param array - array
@@ -10,4 +21,11 @@ const groupBy = <T>(array: T[], predicate: (value: T, index: number, array: T[])
     return acc;
   }, {} as { [key: string]: T[] });
 
-export { groupBy };
+/**
+ * Helper function that conver rating to css width property value
+ * @param raiting - raiting number
+ * @returns - number value for css width property
+ */
+const convertRating = (raiting:number) : number => raiting * RaitingValues.MaxValue / RaitingValues.MaxStars;
+
+export { groupBy, convertRating, humanizeDate };

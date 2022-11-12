@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Offer } from '../../types/offer';
+import { type Offer } from '../../types/offer';
 import { CardClassName, AppRoute } from '../../const';
+import { convertRating } from '../../util';
 
 type CardProps = {
   offer: Offer;
@@ -10,7 +11,7 @@ type CardProps = {
 }
 
 function Card( { offer, getActiveCard, cardClassName }: CardProps ): JSX.Element {
-  const {id, title, isPremium, isFavorite, previewImage, price, type} = offer;
+  const {id, title, isPremium, isFavorite, previewImage, price, type, rating} = offer;
   const [buttonState, setButtonState] = useState(isFavorite);
 
   const onMouseOverHandler = () => {
@@ -56,7 +57,7 @@ function Card( { offer, getActiveCard, cardClassName }: CardProps ): JSX.Element
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{ width: `${convertRating(rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
