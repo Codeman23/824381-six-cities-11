@@ -7,7 +7,7 @@ import { urlMarkerDefault, urlMarkerCurrent, MapIconSize, MapIconPosition } from
 
 type MapProps = {
   offers: Offer[];
-  activeCard: Offer | undefined;
+  activeCard?: Offer | undefined;
 }
 
 const defaultCustomIcon = new Icon({
