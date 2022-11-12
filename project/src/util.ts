@@ -1,4 +1,13 @@
+import dayjs from 'dayjs';
 import { RaitingValues } from './const';
+
+/**
+ * Helper function that convert date format
+ * @param date - source date
+ * @param format - date format
+ * @returns formated date
+ */
+const humanizeDate = (date: string, format: string) => dayjs(date).format(format);
 
 /**
  * Helper function that group array of objects by value of object property
@@ -19,4 +28,4 @@ const groupBy = <T>(array: T[], predicate: (value: T, index: number, array: T[])
  */
 const convertRating = (raiting:number) : number => raiting * RaitingValues.MaxValue / RaitingValues.MaxStars;
 
-export { groupBy, convertRating };
+export { groupBy, convertRating, humanizeDate };

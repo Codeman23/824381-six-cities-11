@@ -1,5 +1,6 @@
 import { type Review } from '../../types/offer';
-import { convertRating } from '../../util';
+import { convertRating, humanizeDate } from '../../util';
+import { dateFormat } from '../../const';
 
 type ReviewItemProps = {
   review: Review;
@@ -26,7 +27,7 @@ function ReviewItem({ review }: ReviewItemProps): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{date}</time>
+        <time className="reviews__time" dateTime="2019-04-24">{humanizeDate(date, dateFormat)}</time>
       </div>
     </li>
   );
