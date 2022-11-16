@@ -32,6 +32,15 @@ enum RaitingValues {
   MaxValue = 100
 }
 
+enum CityType {
+  Paris = 'Paris',
+  Cologne = 'Cologne',
+  Brussels = 'Brussels',
+  Amsterdam = 'Amsterdam',
+  Hamburg = 'Hamburg',
+  Dusseldorf = 'Dusseldorf'
+}
+
 const urlMarkerDefault = '../img/pin.svg';
 const urlMarkerCurrent = '../img/pin-active.svg';
 const instanceLayer = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
@@ -39,4 +48,4 @@ const layerAttribution = '&copy; <a href="https://www.openstreetmap.org/copyrigh
 
 const dateFormat = 'MMMM YYYY';
 
-export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, urlMarkerDefault, urlMarkerCurrent, instanceLayer, layerAttribution, dateFormat };
+export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, CityType, urlMarkerDefault, urlMarkerCurrent, instanceLayer, layerAttribution, dateFormat };
