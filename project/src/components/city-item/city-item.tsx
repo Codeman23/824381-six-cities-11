@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/index';
 type CityItemProps = {
   city: string;
 }
+
 function CityItem({ city }: CityItemProps): JSX.Element {
   const selectedCity = useAppSelector((state) => state.city);
   const dispatch = useAppDispatch();
