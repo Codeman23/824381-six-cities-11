@@ -1,16 +1,12 @@
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/index';
 import { AppRoute } from '../../const';
-import { Offer } from '../../types/offer';
 import { groupBy } from '../../util';
 import Header from '../../components/header/header';
 import FavoriteCardsList from '../../components/favorite-cards-list/favorite-cards-list';
 
-type FavoritePageProps = {
-  offers: Offer[];
-}
-
-function Favorites({ offers }: FavoritePageProps): JSX.Element {
-  const favoriteCards = offers.filter((offer) => offer.isFavorite);
+function Favorites(): JSX.Element {
+  const favoriteCards = useAppSelector((state) => state.offers).filter((offer) => offer.isFavorite);
   const favoritesGroups = groupBy(favoriteCards, (i) => i.city.name);
 
   return (
