@@ -1,4 +1,3 @@
-
 import { selectCity } from '../../store/action';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 
