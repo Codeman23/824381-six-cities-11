@@ -1,5 +1,6 @@
 import { selectCity } from '../../store/action';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import './city-item.css';
 
 type CityItemProps = {
   city: string;
@@ -12,7 +13,6 @@ function CityItem({ city }: CityItemProps): JSX.Element {
   return (
     <li className="locations__item" key={city}>
       <div
-        style={{ 'cursor': 'pointer' }}
         className={`locations__item-link tabs__item ${selectedCity === city ? 'tabs__item--active' : ''}`}
         onClick={() => dispatch(selectCity(city))}
       >

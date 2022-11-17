@@ -1,7 +1,7 @@
 import { CityType } from '../../const';
 import CityItem from '../city-item/city-item';
 
-function CityList(): JSX.Element {
+function CitiesList(): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">
@@ -13,4 +13,4 @@ function CityList(): JSX.Element {
   );
 }
 
-export default CityList;
+export default CitiesList;

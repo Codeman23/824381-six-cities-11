@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks';
 import { CardClassName } from '../../const';
 import { Offer } from '../../types/offer';
 import CardsList from '../../components/cards-list/cards-list';
-import CityList from '../../components/cities-list/cities-list';
+import CitiesList from '../../components/cities-list/cities-list';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 
@@ -17,7 +17,7 @@ function Main(): JSX.Element {
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <CityList />
+        <CitiesList />
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
