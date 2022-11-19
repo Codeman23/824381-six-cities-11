@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
-import { RaitingValues } from './const';
+import { RaitingValues, SortType } from './const';
+import { Offer } from './types/offer';
 
 /**
  * Helper function that convert date format
@@ -28,4 +29,70 @@ const groupBy = <T>(array: T[], predicate: (value: T, index: number, array: T[])
  */
 const convertRating = (raiting:number) : number => raiting * RaitingValues.MaxValue / RaitingValues.MaxStars;
 
-export { groupBy, convertRating, humanizeDate };
+/**
+ *  Function that putt items with no data to the end of the list
+ * @param itemA - item data
+ * @param itemB - item data
+ * @returns - sorted items
+ */
+const getItemsWithNoData = (itemA: number, itemB: number) => {
+  if (itemA === null && itemB === null) {return 0;}
+  if (itemA === null) {return 1;}
+  if (itemB === null) {return -1;}
+  return null;
+};
+
+/**
+ * Function that sorts items by highest price
+ * @param offerA - item data
+ * @param offerB - item data
+ * @returns - sorted items
+ */
+const sortHighToLow = (offerA: Offer, offerB: Offer) => {
+  const itemsWithNoData = getItemsWithNoData(offerA.price, offerB.price);
+  return itemsWithNoData ?? offerB.price - offerA.price;
+};
+
+/**
+ * Function that sorts items by lowest price
+ * @param offerA - item data
+ * @param offerB - item data
+ * @returns - sorted items
+ */
+const sortLowToHigh = (offerA: Offer, offerB: Offer) => {
+  const itemsWithNoData = getItemsWithNoData(offerA.price, offerB.price);
+  return itemsWithNoData ?? offerA.price - offerB.price;
+};
+
+/**
+ * Function that sorts items by highest rating
+ * @param offerA - item data
+ * @param offerB - item data
+ * @returns - sorted items
+ */
+const sortTopRated = (offerA: Offer, offerB: Offer) => {
+  const itemsWithNoData = getItemsWithNoData(offerA.rating, offerB.rating);
+  return itemsWithNoData ?? offerB.rating - offerA.rating;
+};
+
+/**
+ * Function that sorts items by sort type
+ * @param offers - items with data
+ * @param sortType - sort type
+ * @returns - sorted items
+ */
+const getSortedOffers = (offers: Offer[], sortType: string) => {
+  let sortedOffers;
+  switch (sortType) {
+    case SortType.LowToHigh: sortedOffers = offers.sort(sortLowToHigh);
+      break;
+    case SortType.HighToLow: sortedOffers = offers.sort(sortHighToLow);
+      break;
+    case SortType.TopRated: sortedOffers = offers.sort(sortTopRated);
+      break;
+    default: sortedOffers = offers;
+  }
+  return sortedOffers;
+};
+
+export { groupBy, convertRating, humanizeDate, getSortedOffers };

@@ -26,7 +26,7 @@ const offers : Offer[] = [
     title: 'Great flat with 4-5 rooms + 5 balconies',
     isFavorite: true,
     isPremium: false,
-    rating: 4.1,
+    rating: 1.3,
     type: 'hotel',
 
     bedrooms: 2,
@@ -77,7 +77,7 @@ const offers : Offer[] = [
     title: 'Entire flat hosted by Fanis&Tina',
     isFavorite: false,
     isPremium: false,
-    rating: 3.3,
+    rating: 2.5,
     type: 'house',
 
     bedrooms: 2,
@@ -126,7 +126,7 @@ const offers : Offer[] = [
     title: 'Warm big bed apartment',
     isFavorite: true,
     isPremium: false,
-    rating: 3,
+    rating: 3.2,
     type: 'house',
 
     bedrooms: 4,
@@ -181,7 +181,7 @@ const offers : Offer[] = [
     title: 'Loft Studio in the South Central',
     isFavorite: true,
     isPremium: false,
-    rating: 3.7,
+    rating: 4.6,
     type: 'house',
 
     bedrooms: 3,
