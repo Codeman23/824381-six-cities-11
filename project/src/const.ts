@@ -41,6 +41,13 @@ enum CityType {
   Dusseldorf = 'Dusseldorf'
 }
 
+enum SortType {
+  Popular = 'Popular',
+  LowToHigh = 'Price: low to high',
+  HighToLow = 'Price: high to low',
+  TopRated = 'Top rated first',
+}
+
 const urlMarkerDefault = '../img/pin.svg';
 const urlMarkerCurrent = '../img/pin-active.svg';
 const instanceLayer = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
@@ -48,4 +55,4 @@ const layerAttribution = '&copy; <a href="https://www.openstreetmap.org/copyrigh
 
 const dateFormat = 'MMMM YYYY';
 
-export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, CityType, urlMarkerDefault, urlMarkerCurrent, instanceLayer, layerAttribution, dateFormat };
+export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, urlMarkerDefault, urlMarkerCurrent, instanceLayer, layerAttribution, dateFormat };
