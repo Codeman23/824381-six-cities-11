@@ -6,8 +6,18 @@ import Main from '../../pages/main/main';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../../components/private-route/private-route';
 import Realty from '../../pages/realty/realty';
+import { useAppSelector } from '../../hooks';
+import Load from '../../pages/load/load';
 
 function App(): JSX.Element {
+  const isOffersLoaded = useAppSelector((state) => state.isOffersLoaded);
+
+  if(isOffersLoaded) {
+    return (
+      <Load/>
+    );
+  }
+
   return(
     <BrowserRouter>
       <Routes>

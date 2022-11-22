@@ -1,5 +1,5 @@
+import { useAppSelector } from '../../hooks/index';
 import { comments } from '../../mocks/comments';
-import { offers } from '../../mocks/offers';
 import { CardClassName } from '../../const';
 import CardsList from '../../components/cards-list/cards-list';
 import Header from '../../components/header/header';
@@ -8,7 +8,7 @@ import ReviewForm from '../../components/review-form/review-form';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 
 function Realty(): JSX.Element {
-  const nearbyOffers = offers.slice(0,3);
+  const nearbyOffers = useAppSelector((state) => state.offers).slice(0,3);
 
   return (
     <div className="page">
@@ -139,7 +139,7 @@ function Realty(): JSX.Element {
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={nearbyOffers} />
+            {nearbyOffers[0]?.city && <Map offers={nearbyOffers} city={nearbyOffers[0].city} />}
           </section>
         </section>
         <div className="container">

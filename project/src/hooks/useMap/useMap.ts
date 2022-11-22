@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, MutableRefObject } from 'react';
-import { Map, TileLayer } from 'leaflet';
+import { Map, TileLayer, LatLng } from 'leaflet';
 import { instanceLayer, layerAttribution } from '../../const';
 import { City } from '../../types/offer';
 
@@ -15,14 +15,15 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
           lat: latitude,
           lng: longitude
         },
-        zoom: zoom
+        zoom: zoom,
+        scrollWheelZoom: false
       });
 
       /**
        * Toggle mouse wheel scroll for map zooming by click
        */
-      instance.scrollWheelZoom.disable();
-      instance.on('click', () => instance.scrollWheelZoom.enabled() ? instance.scrollWheelZoom.disable() : instance.scrollWheelZoom.enable());
+      // instance.scrollWheelZoom.disable();
+      // instance.on('click', () => instance.scrollWheelZoom.enabled() ? instance.scrollWheelZoom.disable() : instance.scrollWheelZoom.enable());
 
       const layer = new TileLayer(
         instanceLayer,
@@ -37,8 +38,13 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
       setMap(instance);
       isRenderedRef.current = true;
 
+    } else {
+      map?.panTo(new LatLng(latitude, longitude), {
+        animate: true,
+        duration: 0.4
+      });
     }
-  }, [mapRef, map, latitude, longitude, zoom]);
+  }, [mapRef, city, map, latitude, longitude, zoom]);
 
   return map;
 }
