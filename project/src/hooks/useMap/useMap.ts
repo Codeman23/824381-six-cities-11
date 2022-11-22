@@ -15,15 +15,14 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
           lat: latitude,
           lng: longitude
         },
-        zoom: zoom,
-        scrollWheelZoom: false
+        zoom: zoom
       });
 
       /**
        * Toggle mouse wheel scroll for map zooming by click
        */
-      // instance.scrollWheelZoom.disable();
-      // instance.on('click', () => instance.scrollWheelZoom.enabled() ? instance.scrollWheelZoom.disable() : instance.scrollWheelZoom.enable());
+      instance.scrollWheelZoom.disable();
+      instance.on('click', () => instance.scrollWheelZoom.enabled() ? instance.scrollWheelZoom.disable() : instance.scrollWheelZoom.enable());
 
       const layer = new TileLayer(
         instanceLayer,
