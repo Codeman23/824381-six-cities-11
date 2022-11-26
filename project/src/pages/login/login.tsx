@@ -1,7 +1,7 @@
 import { FormEvent, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Auth } from '../../types/auth';
-import { AppRoute, CityType } from '../../const';
+import { AppRoute, CityType, TIMEOUT_PASSWORD_ERROR } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { selectCity } from '../../store/action';
 import { loginAction } from '../../store/api-action';
@@ -13,8 +13,6 @@ function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const [isPasswordError, setPasswordError] = useState<boolean>(false);
-
-  const TIMEOUT_PASSWORD_ERROR = 3000;
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

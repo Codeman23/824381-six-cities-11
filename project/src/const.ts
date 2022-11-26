@@ -69,5 +69,6 @@ const LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyrig
 const DATE_FORMAT = 'MMMM YYYY';
 
 const TIMEOUT_ERROR = 2000;
+const TIMEOUT_PASSWORD_ERROR = 3000;
 
-export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR };
+export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR, TIMEOUT_PASSWORD_ERROR };
