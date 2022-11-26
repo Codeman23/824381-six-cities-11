@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState, MutableRefObject } from 'react';
 import { Map, TileLayer, LatLng } from 'leaflet';
-import { instanceLayer, layerAttribution } from '../../const';
+import { INSTANCE_LAYER, LAYER_ATTRIBUTION } from '../../const';
 import { City } from '../../types/offer';
 
 function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map | null {
@@ -25,10 +25,10 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
       instance.on('click', () => instance.scrollWheelZoom.enabled() ? instance.scrollWheelZoom.disable() : instance.scrollWheelZoom.enable());
 
       const layer = new TileLayer(
-        instanceLayer,
+        INSTANCE_LAYER,
         {
           attribution:
-            layerAttribution
+            LAYER_ATTRIBUTION
         }
       );
 

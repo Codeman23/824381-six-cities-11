@@ -3,7 +3,7 @@ import useMap from '../../hooks/useMap/useMap';
 import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Offer, City } from '../../types/offer';
-import { urlMarkerDefault, urlMarkerCurrent, MapIconSize, MapIconPosition } from '../../const';
+import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT, MapIconSize, MapIconPosition } from '../../const';
 
 type MapProps = {
   offers: Offer[];
@@ -12,13 +12,13 @@ type MapProps = {
 }
 
 const defaultCustomIcon = new Icon({
-  iconUrl: urlMarkerDefault,
+  iconUrl: URL_MARKER_DEFAULT,
   iconSize: [MapIconSize.Width, MapIconSize.Height],
   iconAnchor: [MapIconPosition.X, MapIconPosition.Y]
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: urlMarkerCurrent,
+  iconUrl: URL_MARKER_CURRENT,
   iconSize: [MapIconSize.Width, MapIconSize.Height],
   iconAnchor: [MapIconPosition.X, MapIconPosition.Y]
 });
