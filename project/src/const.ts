@@ -52,13 +52,22 @@ enum APIRoute {
   Offers = '/hotels',
   Login = '/login',
   Logout = '/logout',
+  Favorite = '/favorite'
 }
 
-const urlMarkerDefault = '../img/pin.svg';
-const urlMarkerCurrent = '../img/pin-active.svg';
-const instanceLayer = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
-const layerAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+enum StatusCode {
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404
+}
 
-const dateFormat = 'MMMM YYYY';
+const URL_MARKER_DEFAULT = '../img/pin.svg';
+const URL_MARKER_CURRENT = '../img/pin-active.svg';
+const INSTANCE_LAYER = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+const LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
-export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, urlMarkerDefault, urlMarkerCurrent, instanceLayer, layerAttribution, dateFormat };
+const DATE_FORMAT = 'MMMM YYYY';
+
+const TIMEOUT_ERROR = 2000;
+
+export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR };
