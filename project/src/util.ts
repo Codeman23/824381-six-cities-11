@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { RaitingValues, SortType } from './const';
 import { Offer } from './types/offer';
+import { Review } from './types/review';
 
 /**
  * Helper function that convert date format
@@ -95,4 +96,12 @@ const getSortedOffers = (offers: Offer[], sortType: string) => {
   return sortedOffers;
 };
 
-export { groupBy, convertRating, humanizeDate, getSortedOffers };
+/**
+ * Function that sorts reviews by date
+ * @param reviewA - review item
+ * @param reviewB - review item
+ * @returns - sorted reviews
+ */
+const sortReviews = (reviewA: Review, reviewB: Review) => dayjs(reviewB.date).diff(dayjs(reviewA.date));
+
+export { groupBy, convertRating, humanizeDate, getSortedOffers, sortReviews };

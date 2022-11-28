@@ -6,7 +6,6 @@ import { CityType, AuthorizationStatus } from '../const';
 type InitialCityState = {
   city: string;
   offers: Offer[];
-  favoriteOffers: Offer[];
   isOffersLoaded: boolean;
   authorizationStatus: AuthorizationStatus;
   error: string | null;
@@ -15,7 +14,6 @@ type InitialCityState = {
 const initialCityState: InitialCityState = {
   city: CityType.Paris,
   offers: [],
-  favoriteOffers: [],
   isOffersLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   error: null

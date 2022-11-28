@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import { getSortedOffers } from '../../util';
 import { CardClassName, SortType } from '../../const';
 import { Offer } from '../../types/offer';
+import { fetchOffersAction } from '../../store/api-action';
 import CardsList from '../../components/cards-list/cards-list';
 import CitiesList from '../../components/cities-list/cities-list';
 import Header from '../../components/header/header';
@@ -12,8 +13,16 @@ import SortList from '../../components/sort-list/sort-list';
 function Main(): JSX.Element {
   const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
   const [activeSortItem, setActiveSortItem] = useState<string>(SortType.Popular);
+
+  const dispatch = useAppDispatch();
+  const offers = useAppSelector((state) => state.offers);
+
+  if(offers.length === 0) {
+    dispatch(fetchOffersAction());
+  }
+
   const city = useAppSelector((state) => state.city);
-  const currentOffers = useAppSelector((state) => state.offers).filter((offer) => offer.city.name === city);
+  const currentOffers = offers.filter((offer) => offer.city.name === city);
   const sortedOffers = getSortedOffers(currentOffers, activeSortItem);
 
   return (
