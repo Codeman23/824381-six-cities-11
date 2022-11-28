@@ -52,7 +52,8 @@ enum APIRoute {
   Offers = '/hotels',
   Login = '/login',
   Logout = '/logout',
-  Favorite = '/favorite'
+  Favorite = '/favorite',
+  Comments = '/comments'
 }
 
 enum StatusCode {
@@ -60,6 +61,29 @@ enum StatusCode {
   Unauthorized = 401,
   NotFound = 404
 }
+
+const RatingData = [
+  {
+    title: 'perfect',
+    value: 5
+  },
+  {
+    title: 'good',
+    value: 4
+  },
+  {
+    title: 'not bad',
+    value: 3
+  },
+  {
+    title: 'badly',
+    value: 2
+  },
+  {
+    title: 'terribly',
+    value: 1
+  }
+];
 
 const URL_MARKER_DEFAULT = '../img/pin.svg';
 const URL_MARKER_CURRENT = '../img/pin-active.svg';
@@ -70,5 +94,11 @@ const DATE_FORMAT = 'MMMM YYYY';
 
 const TIMEOUT_ERROR = 2000;
 const TIMEOUT_PASSWORD_ERROR = 3000;
+const RE = /^(?=.*[A-Za-z])(?=.*[0-9]).{2,}$/;
 
-export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR, TIMEOUT_PASSWORD_ERROR };
+const MAX_REVIEWS_COUNT = 10;
+
+const MIN_COMMENT_LENGTH = 50;
+const MAX_COMMENT_LENGTH = 300;
+
+export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, RatingData, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR, TIMEOUT_PASSWORD_ERROR, RE, MAX_REVIEWS_COUNT, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH };

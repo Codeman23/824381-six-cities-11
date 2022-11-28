@@ -1,4 +1,4 @@
-import { type Review } from '../../types/offer';
+import { type Review } from '../../types/review';
 import { convertRating, humanizeDate } from '../../util';
 import { DATE_FORMAT } from '../../const';
 

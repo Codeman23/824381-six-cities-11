@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { type Offer } from '../../types/offer';
-import { CardClassName, AppRoute } from '../../const';
+import { CardClassName } from '../../const';
 import { convertRating } from '../../util';
 
 type CardProps = {
@@ -34,7 +34,7 @@ function Card( { offer, getActiveCard, cardClassName }: CardProps ): JSX.Element
     <article id={String(id)} className={`${cardClassName}__card place-card`} onMouseOver={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler}>
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null }
       <div className={`${cardClassName}__image-wrapper place-card__image-wrapper`}>
-        <Link to={AppRoute.Realty}>
+        <Link to={ `/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width={cardClassName === CardClassName.Main ? '260' : '150'} height={cardClassName === CardClassName.Main ? '200' : '110'} alt="place-img" />
         </Link>
       </div>
@@ -62,7 +62,7 @@ function Card( { offer, getActiveCard, cardClassName }: CardProps ): JSX.Element
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Realty}>{title}</Link>
+          <Link to={ `/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

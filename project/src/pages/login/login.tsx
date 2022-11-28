@@ -1,7 +1,7 @@
 import { FormEvent, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Auth } from '../../types/auth';
-import { AppRoute, CityType, TIMEOUT_PASSWORD_ERROR } from '../../const';
+import { AppRoute, CityType, TIMEOUT_PASSWORD_ERROR, RE } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { selectCity } from '../../store/action';
 import { loginAction } from '../../store/api-action';
@@ -26,7 +26,7 @@ function Login(): JSX.Element {
     setPasswordError(false);
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      if (passwordRef.current.value.length > 2) {
+      if (passwordRef.current.value.length > 2 && RE.test(passwordRef.current.value)) {
         onSubmit({
           login: loginRef.current.value,
           password: passwordRef.current.value,

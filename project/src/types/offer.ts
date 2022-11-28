@@ -35,12 +35,4 @@ type Offer = {
   type: string;
 };
 
-type Review = {
-  comment: string;
-  date: string;
-  id: number;
-  rating: number;
-  user: User;
-}
-
-export { type Offer, type City, type Review };
+export { type Offer, type City, type User };
