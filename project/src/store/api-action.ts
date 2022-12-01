@@ -1,15 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state';
-import { loadOffers, setOffersLoadStatus, setError, setAuthorizationStatus} from './action';
+import { redirectToRoute } from './action';
 import { Offer } from '../types/offer';
-import { APIRoute, AuthorizationStatus, TIMEOUT_ERROR } from '../const';
+import { APIRoute, AppRoute } from '../const';
 import { dropUserData, saveUserData } from '../services/user-data';
 import { User } from '../types/user';
 import { Auth } from '../types/auth';
-import { store } from '.';
 
-const fetchOffersAction = createAsyncThunk<void, undefined, {
+const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -17,9 +16,7 @@ const fetchOffersAction = createAsyncThunk<void, undefined, {
   'data/fetchOffers',
   async (_arg, { dispatch, extra: api }) => {
     const { data } = await api.get<Offer[]>(APIRoute.Offers);
-    dispatch(setOffersLoadStatus(true));
-    dispatch(loadOffers(data));
-    dispatch(setOffersLoadStatus(false));
+    return data;
   }
 );
 
@@ -30,12 +27,7 @@ const checkAuthAction = createAsyncThunk<void, undefined, {
 }>(
   'user/checkAuth',
   async (_arg, { dispatch, extra: api }) => {
-    try {
-      await api.get(APIRoute.Login);
-      dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
-    } catch {
-      dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
-    }
+    await api.get(APIRoute.Login);
   },
 );
 
@@ -48,7 +40,7 @@ const loginAction = createAsyncThunk<void, Auth, {
   async ({ login: email, password }, { dispatch, extra: api }) => {
     const { data } = await api.post<User>(APIRoute.Login, { email, password });
     saveUserData(data);
-    dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Main));
   },
 );
 
@@ -61,18 +53,7 @@ const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, { dispatch, extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropUserData();
-    dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
   },
 );
 
-const clearErrorAction = createAsyncThunk(
-  'main/clearError',
-  () => {
-    setTimeout(
-      () => store.dispatch(setError(null)),
-      TIMEOUT_ERROR,
-    );
-  },
-);
-
-export { fetchOffersAction, checkAuthAction, loginAction, logoutAction, clearErrorAction };
+export { fetchOffersAction, checkAuthAction, loginAction, logoutAction };

@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/index';
+import { getOffers } from '../../store/data-process/selectors';
 import { AppRoute } from '../../const';
 import { groupBy } from '../../util';
 import Header from '../../components/header/header';
 import FavoriteCardsList from '../../components/favorite-cards-list/favorite-cards-list';
 
 function Favorites(): JSX.Element {
-  const favoriteCards = useAppSelector((state) => state.offers).filter((offer) => offer.isFavorite);
-  const favoritesGroups = groupBy(favoriteCards, (i) => i.city.name);
+  const favoriteOffers = useAppSelector(getOffers).filter((offer) => offer.isFavorite);
+  const favoritesGroups = groupBy(favoriteOffers, (i) => i.city.name);
 
   return (
     <div className="page">

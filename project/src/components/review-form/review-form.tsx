@@ -1,9 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { APIRoute, RatingData, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
-import { useAppDispatch } from '../../hooks';
 import { api } from '../../store';
-import { setError } from '../../store/action';
 import { Review, ReviewData } from '../../types/review';
 import ReviewRatingStars from '../../components/review-rating-star/review-rating-star';
 
@@ -21,8 +20,6 @@ function ReviewForm( {setComments}: ReviewFormProps ): JSX.Element {
   };
   const [formData, setFormData] = useState<ReviewData>(defaultFormData);
 
-  const dispatch = useAppDispatch();
-
   const fieldChangeHandle = ({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = target;
     setFormData({ ...formData, [name]: value });
@@ -37,7 +34,7 @@ function ReviewForm( {setComments}: ReviewFormProps ): JSX.Element {
       setFormDisabled(false);
       setFormData(defaultFormData);
     } catch (error) {
-      dispatch(setError('Can not send your comment'));
+      toast.warn('Can not send your comment');
       setFormDisabled(false);
     }
   };

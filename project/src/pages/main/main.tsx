@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { getSortedOffers } from '../../util';
 import { CardClassName, SortType } from '../../const';
 import { Offer } from '../../types/offer';
-import { fetchOffersAction } from '../../store/api-action';
+import { getCity } from '../../store/app-action-process/selectors';
+import { getOffers } from '../../store/data-process/selectors';
+import { selectCity } from '../../store/action';
 import CardsList from '../../components/cards-list/cards-list';
 import CitiesList from '../../components/cities-list/cities-list';
 import Header from '../../components/header/header';
@@ -15,22 +16,18 @@ function Main(): JSX.Element {
   const [activeSortItem, setActiveSortItem] = useState<string>(SortType.Popular);
 
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
 
-  if(offers.length === 0) {
-    dispatch(fetchOffersAction());
-  }
-
-  const city = useAppSelector((state) => state.city);
-  const currentOffers = offers.filter((offer) => offer.city.name === city);
-  const sortedOffers = getSortedOffers(currentOffers, activeSortItem);
+  const city = useAppSelector(getCity);
+  const setCity = useCallback((cityItem: string) => dispatch(selectCity(cityItem)), [dispatch]);
+  const currentOffers = useMemo(() => offers.filter((offer) => offer.city.name === city), [offers, city]);
 
   return (
     <div className="page page--gray page--main">
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <CitiesList />
+        <CitiesList selectedCity={city} setCity={setCity}/>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -38,7 +35,7 @@ function Main(): JSX.Element {
               <b className="places__found">{currentOffers.length} places to stay in {city}</b>
               <SortList activeSortItem={activeSortItem} setActiveSortItem={setActiveSortItem} />
               <div className="cities__places-list places__list tabs__content">
-                <CardsList offers={sortedOffers} getActiveCard={setActiveCard} cardClassName={CardClassName.Main} />
+                <CardsList offers={currentOffers} activeSortItem={activeSortItem} getActiveCard={setActiveCard} cardClassName={CardClassName.Main} />
               </div>
             </section>
             <div className="cities__right-section">

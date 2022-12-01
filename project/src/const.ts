@@ -62,6 +62,12 @@ enum StatusCode {
   NotFound = 404
 }
 
+enum NameSpace {
+  Data = 'DATA',
+  User = 'USER',
+  AppAction = 'AppAction'
+}
+
 const RatingData = [
   {
     title: 'perfect',
@@ -101,4 +107,6 @@ const MAX_REVIEWS_COUNT = 10;
 const MIN_COMMENT_LENGTH = 50;
 const MAX_COMMENT_LENGTH = 300;
 
-export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, RatingData, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR, TIMEOUT_PASSWORD_ERROR, RE, MAX_REVIEWS_COUNT, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH };
+const MAX_RANDOM_CITY = 5;
+
+export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, NameSpace, RatingData, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR, TIMEOUT_PASSWORD_ERROR, RE, MAX_REVIEWS_COUNT, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, MAX_RANDOM_CITY };

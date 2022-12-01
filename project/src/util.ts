@@ -104,4 +104,16 @@ const getSortedOffers = (offers: Offer[], sortType: string) => {
  */
 const sortReviews = (reviewA: Review, reviewB: Review) => dayjs(reviewB.date).diff(dayjs(reviewA.date));
 
-export { groupBy, convertRating, humanizeDate, getSortedOffers, sortReviews };
+/**
+ * Function that returns random number from specified range value
+ * @param min - min range value
+ * @param max - max range value
+ * @returns  - random number
+ */
+function getRandomNumber(min: number, max: number) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export { groupBy, convertRating, humanizeDate, getSortedOffers, sortReviews, getRandomNumber };
