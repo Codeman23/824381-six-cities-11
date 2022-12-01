@@ -1,8 +1,9 @@
-import { useAppSelector, useAppDispatch } from '../../hooks/index';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/index';
 import { api } from '../../store';
-import { setError } from '../../store/action';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
 import { convertRating } from '../../util';
@@ -23,8 +24,7 @@ function Realty(): JSX.Element {
   const [comments, setComments] = useState<Review[]>([]);
 
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const isAuth = useAppSelector((state) => state.authorizationStatus) === AuthorizationStatus.Auth;
+  const isAuth = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
 
   let offersForMap;
 
@@ -42,7 +42,7 @@ function Realty(): JSX.Element {
       const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${currentId}/nearby`);
       setNearbyOffers(data);
     } catch (error) {
-      dispatch(setError('Can not find nearby offers'));
+      toast.warn('Can not find nearby offers');
     }
   };
 
@@ -51,7 +51,7 @@ function Realty(): JSX.Element {
       const { data } = await api.get<Review[]>(`${APIRoute.Comments}/${currentId}`);
       setComments(data);
     } catch (error) {
-      dispatch(setError('Can not find comments'));
+      toast.warn('Can not find comments');
     }
   };
 

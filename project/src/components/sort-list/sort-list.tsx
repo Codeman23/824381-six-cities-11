@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { SortType } from '../../const';
 import SortItem from '../sort-item/sort-item';
 
@@ -33,4 +33,4 @@ function SortList( {activeSortItem, setActiveSortItem}: SortListProps ): JSX.Ele
   );
 }
 
-export default SortList;
+export default memo(SortList);

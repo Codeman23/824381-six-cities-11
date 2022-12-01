@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus, APIRoute } from '../../const';
 import { Offer } from '../../types/offer';
@@ -6,14 +7,13 @@ import { api } from '../../store';
 import { logoutAction } from '../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getUserData } from '../../services/user-data';
-
 import HeaderLogo from '../header-logo/header-logo';
 
 function Header(): JSX.Element {
   const [favoriteCount, setFavoriteCount] = useState(0);
   const dispatch = useAppDispatch();
   const userData = getUserData();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const getFavoriteOffers = async () => {
     const { data } = await api.get<Offer[]>(APIRoute.Favorite);
@@ -64,4 +64,4 @@ function Header(): JSX.Element {
   );
 }
 
-export default Header;
+export default memo(Header);

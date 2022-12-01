@@ -1,21 +1,28 @@
 import { FormEvent, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Auth } from '../../types/auth';
-import { AppRoute, CityType, TIMEOUT_PASSWORD_ERROR, RE } from '../../const';
+import { AppRoute, CityType, TIMEOUT_PASSWORD_ERROR, RE, MAX_RANDOM_CITY } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { selectCity } from '../../store/action';
 import { loginAction } from '../../store/api-action';
+import { getRandomNumber } from '../../util';
 import HeaderLogo from '../../components/header-logo/header-logo';
 import './password-error.css';
 
 function Login(): JSX.Element {
-
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const [isPasswordError, setPasswordError] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+
+  const getRandomCity = () => {
+    const cities = Array.from(Object.values(CityType));
+
+    return cities[getRandomNumber(0, MAX_RANDOM_CITY)];
+  };
+
+  const randomCity = getRandomCity();
 
   const onSubmit = (authData: Auth) => {
     dispatch(loginAction(authData));
@@ -31,14 +38,13 @@ function Login(): JSX.Element {
           login: loginRef.current.value,
           password: passwordRef.current.value,
         });
-        navigate(AppRoute.Main);
+      } else {
+        setPasswordError(true);
+        setTimeout(
+          () => (setPasswordError(false)),
+          TIMEOUT_PASSWORD_ERROR,
+        );
       }
-
-      setPasswordError(true);
-      setTimeout(
-        () => (setPasswordError(false)),
-        TIMEOUT_PASSWORD_ERROR,
-      );
     }
   };
 
@@ -72,8 +78,8 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link onClick={()=>{dispatch(selectCity(CityType.Amsterdam));}} to={AppRoute.Main}>
-                <span className="locations__item-link">Amsterdam</span>
+              <Link onClick={()=>{ dispatch(selectCity(randomCity)); }} to={AppRoute.Main}>
+                <span className="locations__item-link">{randomCity}</span>
               </Link>
             </div>
           </section>
