@@ -12,9 +12,10 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-enum CardClassName {
+enum PageType {
   Main = 'cities',
-  Favorite = 'favorites'
+  Favorite = 'favorites',
+  Room = 'near-places'
 }
 
 enum MapIconSize {
@@ -65,7 +66,17 @@ enum StatusCode {
 enum NameSpace {
   Data = 'DATA',
   User = 'USER',
-  AppAction = 'AppAction'
+  AppAction = 'APP_ACTION'
+}
+
+enum FavoriteStatus {
+  Favorite = 1,
+  NotFavorite = 0
+}
+
+enum UpdateType {
+  CurrentOffer = 'CURRENT_OFFER',
+  Nearby = 'NEARBY'
 }
 
 const RatingData = [
@@ -109,4 +120,4 @@ const MAX_COMMENT_LENGTH = 300;
 
 const MAX_RANDOM_CITY = 5;
 
-export { AppRoute, AuthorizationStatus, CardClassName, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, NameSpace, RatingData, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR, TIMEOUT_PASSWORD_ERROR, RE, MAX_REVIEWS_COUNT, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, MAX_RANDOM_CITY };
+export { AppRoute, AuthorizationStatus, PageType, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, NameSpace, FavoriteStatus, UpdateType, RatingData, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR, TIMEOUT_PASSWORD_ERROR, RE, MAX_REVIEWS_COUNT, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, MAX_RANDOM_CITY };

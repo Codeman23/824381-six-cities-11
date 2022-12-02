@@ -1,43 +1,39 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { APIRoute, RatingData, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
-import { api } from '../../store';
-import { Review, ReviewData } from '../../types/review';
+import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
+import { FormData } from '../../types/review';
+import { RatingData, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { setCommentAction } from '../../store/api-action';
 import ReviewRatingStars from '../../components/review-rating-star/review-rating-star';
 
 type ReviewFormProps = {
-  setComments: (comments: Review[]) => void;
+  id: number;
 };
 
-function ReviewForm( {setComments}: ReviewFormProps ): JSX.Element {
+const defaultFormData = {
+  comment: '',
+  rating: null
+};
 
-  const { id } = useParams();
+function ReviewForm({ id }: ReviewFormProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const [formDisabled, setFormDisabled] = useState<boolean>(false);
-  const defaultFormData = {
-    comment: '',
-    rating: null
-  };
-  const [formData, setFormData] = useState<ReviewData>(defaultFormData);
+  const [formData, setFormData] = useState<FormData>(defaultFormData);
 
   const fieldChangeHandle = ({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (evt: FormEvent) => {
+  const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
-    try {
-      setFormDisabled(true);
-      const { data } = await api.post<Review[]>(`${APIRoute.Comments}/${Number(id)}`, formData);
-      setComments(data);
-      setFormDisabled(false);
-      setFormData(defaultFormData);
-    } catch (error) {
-      toast.warn('Can not send your comment');
-      setFormDisabled(false);
-    }
+    setFormDisabled(true);
+    dispatch(setCommentAction({ id, formData }));
+    setFormData(defaultFormData);
+    setFormDisabled(false);
   };
+
+  useEffect(() => { setFormData(defaultFormData);}, [id]);
 
   return (
     <form className="reviews__form form" action="" onSubmit={(evt) => {handleSubmit(evt);}}>

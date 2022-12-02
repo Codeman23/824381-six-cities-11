@@ -1,5 +1,6 @@
 import { store } from '../store/index.js';
 import { Offer } from './offer.js';
+import { Review } from './review.js';
 import { AuthorizationStatus } from '../const';
 
 type State = ReturnType<typeof store.getState>;
@@ -11,8 +12,18 @@ type UserProcess = {
 };
 
 type DataProcess = {
-  offers: Offer[];
-  isOffersLoaded: boolean;
+  currentOffer: Offer | undefined;
+  offers: Offer[] | undefined;
+  favoriteOffers: Offer[];
+  nearbyOffers: Offer[];
+  comments: Review[];
+  loadedState: {
+    isCurrentOfferLoading: boolean;
+    isOffersLoading: boolean;
+    isOffersLoaded: boolean;
+    isFavoritesLoaded: boolean;
+    isNearbyLoaded: boolean;
+  };
 };
 
 type AppActionData = {

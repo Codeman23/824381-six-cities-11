@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks';
 import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getOffersLoadedData } from '../../store/data-process/selectors';
+import { getOffersLoadingData } from '../../store/data-process/selectors';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Favorites from '../../pages/favorites/favorites';
 import Load from '../../pages/load/load';
@@ -15,9 +15,9 @@ import Realty from '../../pages/realty/realty';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isOffersLoaded = useAppSelector(getOffersLoadedData);
+  const isOffersLoading = useAppSelector(getOffersLoadingData);
 
-  if(authorizationStatus === AuthorizationStatus.Unknown || isOffersLoaded) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersLoading) {
     return (
       <Load/>
     );

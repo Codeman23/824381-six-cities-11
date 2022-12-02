@@ -116,4 +116,22 @@ function getRandomNumber(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export { groupBy, convertRating, humanizeDate, getSortedOffers, sortReviews, getRandomNumber };
+/**
+ * Function that remove current item from items
+ * @param offers - items
+ * @param currentOffer - curent item
+ * @returns items without current item
+ */
+const removeOffer = (offers: Offer[], currentOffer: Offer) => {
+  const currenIndex = offers.findIndex((offer) => offer.id === currentOffer.id);
+
+  const currentOffers = [
+    ...offers.slice(0, currenIndex),
+    currentOffer,
+    ...offers.slice(currenIndex + 1),
+  ];
+
+  return currentOffers;
+};
+
+export { groupBy, convertRating, humanizeDate, getSortedOffers, sortReviews, getRandomNumber, removeOffer };

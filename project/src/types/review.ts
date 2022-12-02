@@ -8,9 +8,14 @@ type Review = {
   user: User;
 }
 
-type ReviewData = {
+type FormData = {
   comment: string;
   rating: number | null;
 }
 
-export { type Review, type ReviewData };
+type ReviewData = {
+  id: number;
+  formData: FormData;
+}
+
+export { type Review, type FormData, type ReviewData };
