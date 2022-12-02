@@ -3,7 +3,7 @@ import { Offer } from '../types/offer';
 import { Review } from '../types/review';
 import { AppRoute } from '../const';
 
-const redirectToRoute = createAction<AppRoute>('game/redirectToRoute');
+const redirectToRoute = createAction<AppRoute>('main/redirectToRoute');
 
 const selectCity = createAction<string>('main/selectCity');
 

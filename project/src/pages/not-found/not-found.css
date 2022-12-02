@@ -1,0 +1,11 @@
+.notFound {
+  text-align: center;
+}
+
+.notFound__title {
+  font-size: 90px;
+}
+
+.notFound__link {
+  color: blue;
+}

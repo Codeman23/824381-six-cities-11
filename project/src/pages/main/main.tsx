@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { fetchOffersAction } from '../../store/api-action';
 import { PageType, SortType } from '../../const';
@@ -6,6 +6,7 @@ import { Offer } from '../../types/offer';
 import { getCity } from '../../store/app-action-process/selectors';
 import { getOffers } from '../../store/data-process/selectors';
 import { selectCity } from '../../store/action';
+import { getSortedOffers } from '../../util';
 import CardsList from '../../components/cards-list/cards-list';
 import CitiesList from '../../components/cities-list/cities-list';
 import Header from '../../components/header/header';
@@ -21,7 +22,9 @@ function Main(): JSX.Element {
   const offers = useAppSelector(getOffers);
   const setCity = useCallback((cityItem: string) => dispatch(selectCity(cityItem)), [dispatch]);
   const favoriteCount = offers.filter((offer) => offer.isFavorite).length;
-  const currentOffers = useMemo(() => offers.filter((offer) => offer.city.name === city), [offers, city]);
+  const sortedByCityOffers = offers.filter((offer) => offer.city.name === city);
+  const currentOffers = getSortedOffers(sortedByCityOffers, activeSortItem);
+
   const isEmpty = currentOffers.length === 0;
 
   useEffect(() => {
@@ -46,7 +49,7 @@ function Main(): JSX.Element {
                   <b className="places__found">{currentOffers.length} places to stay in {city}</b>
                   <SortList activeSortItem={activeSortItem} setActiveSortItem={setActiveSortItem} />
                   <div className="cities__places-list places__list tabs__content">
-                    <CardsList offers={currentOffers} activeSortItem={activeSortItem} setActiveCard={setActiveCard} pageType={PageType.Main} />
+                    <CardsList offers={currentOffers} setActiveCard={setActiveCard} pageType={PageType.Main} />
                   </div>
                 </section>
                 <div className="cities__right-section">
