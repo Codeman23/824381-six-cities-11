@@ -60,26 +60,14 @@ const setFavoriteStatusAction = createAsyncThunk<void, FavoriteStatusData, {
   extra: AxiosInstance;
 }>(
   'favorite/setFavoriteStatus',
-  async ({ currentId, status, update }, { dispatch, extra: api }) => {
+  async ({ currentId, status }, { dispatch, extra: api }) => {
     try {
-      const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${String(currentId)}/${status}`);
-      switch (update) {
-        case UpdateType.CurrentOffer:
-          dispatch(updateCurrentOffer(data));
-          dispatch(updateFavoriteOffers(data));
-          dispatch(updateOffers(data));
-          break;
-        case UpdateType.Nearby:
-          dispatch(updateFavoriteOffers(data));
-          dispatch(updateNearbyOffers(data));
-          dispatch(updateOffers(data));
-          break;
-        default:
-          dispatch(updateCurrentOffer(data));
-          dispatch(updateFavoriteOffers(data));
-          dispatch(updateNearbyOffers(data));
-          dispatch(updateOffers(data));
-          break;
+      if (currentId) {
+        const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${currentId}/${status}`);
+        dispatch(updateCurrentOffer(data));
+        dispatch(updateFavoriteOffers(data));
+        dispatch(updateNearbyOffers(data));
+        dispatch(updateOffers(data));
       }
     } catch {
       dispatch(redirectToRoute(AppRoute.Login));
