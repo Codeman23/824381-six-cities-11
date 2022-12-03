@@ -1,53 +1,63 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { type Offer } from '../../types/offer';
-import { CardClassName } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { setFavoriteStatusAction } from '../../store/api-action';
+import { PageType, FavoriteStatus } from '../../const';
 import { convertRating } from '../../util';
 
 type CardProps = {
   offer: Offer;
-  getActiveCard: ((offer: Offer | undefined) => void) | undefined;
-  cardClassName: string;
+  setActiveCard: ((offer: Offer | undefined) => void) | undefined;
+  pageType: string;
+  updateType?: string;
 }
 
-function Card( { offer, getActiveCard, cardClassName }: CardProps ): JSX.Element {
+function Card( { offer, setActiveCard, updateType, pageType }: CardProps ): JSX.Element {
   const {id, title, isPremium, isFavorite, previewImage, price, type, rating} = offer;
-  const [buttonState, setButtonState] = useState(isFavorite);
+  const dispatch = useAppDispatch();
 
   const onMouseOverHandler = () => {
-    if (getActiveCard) {
-      return getActiveCard(offer);
+    if (setActiveCard) {
+      return setActiveCard(offer);
     }
   };
 
   const onMouseLeaveHandler = () => {
-    if (getActiveCard) {
-      return getActiveCard(undefined);
+    if (setActiveCard) {
+      return setActiveCard(undefined);
     }
   };
 
-  const buttonClickHandle = () => {
-    setButtonState((prevButtonState) => !prevButtonState);
+  const favoriteButtonClickHandle = () => {
+    dispatch(setFavoriteStatusAction({
+      currentId: id,
+      status: isFavorite ? FavoriteStatus.NotFavorite : FavoriteStatus.Favorite,
+    }));
   };
 
   return (
-    <article id={String(id)} className={`${cardClassName}__card place-card`} onMouseOver={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler}>
+    <article id={String(id)} className={`${pageType}__card place-card`} onMouseOver={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler}>
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null }
-      <div className={`${cardClassName}__image-wrapper place-card__image-wrapper`}>
+      <div className={`${pageType}__image-wrapper place-card__image-wrapper`}>
         <Link to={ `/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width={cardClassName === CardClassName.Main ? '260' : '150'} height={cardClassName === CardClassName.Main ? '200' : '110'} alt="place-img" />
+          <img
+            className="place-card__image"
+            src={previewImage} width={pageType !== PageType.Favorite ? '260' : '150'}
+            height={pageType !== PageType.Favorite ? '200' : '110'}
+            alt="Place"
+          />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${pageType === PageType.Favorite ? 'favorites__card-info' : ''} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button ${buttonState ? 'place-card__bookmark-button--active' : ''} button`}
+            className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
             type="button"
-            onClick={buttonClickHandle}
+            onClick={favoriteButtonClickHandle}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>

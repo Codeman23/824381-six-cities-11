@@ -1,13 +1,11 @@
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/index';
-import { api } from '../../store';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../hooks/index';
+import { fetchCurrentOfferAction, fetchFavoriteOffersAction, fetchNearbyOffersAction, setFavoriteStatusAction } from '../../store/api-action';
+import { getFavoriteOffers, getNearbyOffers, getOffer } from '../../store/data-process/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { Offer } from '../../types/offer';
-import { Review } from '../../types/review';
 import { convertRating } from '../../util';
-import { CardClassName, APIRoute, AppRoute, AuthorizationStatus } from '../../const';
+import { PageType, AuthorizationStatus, FavoriteStatus } from '../../const';
 import CardsList from '../../components/cards-list/cards-list';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
@@ -19,55 +17,38 @@ import RoomItem from '../../components/room-item/room-item';
 function Realty(): JSX.Element {
   const { id } = useParams();
   const currentId = Number(id);
-  const [offer, setOffer] = useState<Offer | null>(null);
-  const [nearbyOffers, setNearbyOffers] = useState<Offer[]>([]);
-  const [comments, setComments] = useState<Review[]>([]);
-
-  const navigate = useNavigate();
+  const offer = useAppSelector(getOffer);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const favoriteCount = useAppSelector(getFavoriteOffers).length;
+  let offersForMap;
+  const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
 
-  let offersForMap;
-
-  const getOffer = async () => {
-    try {
-      const { data } = await api.get<Offer>(`${APIRoute.Offers}/${currentId}`);
-      setOffer(data);
-    } catch (error) {
-      navigate(AppRoute.NotFound);
-    }
+  const handleFavoriteButtonClick = () => {
+    dispatch(setFavoriteStatusAction({
+      currentId: currentId,
+      status: offer.isFavorite ? FavoriteStatus.NotFavorite : FavoriteStatus.Favorite
+    }));
   };
-
-  const getNearbyOffers = async () => {
-    try {
-      const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${currentId}/nearby`);
-      setNearbyOffers(data);
-    } catch (error) {
-      toast.warn('Can not find nearby offers');
-    }
-  };
-
-  const getComments = async () => {
-    try {
-      const { data } = await api.get<Review[]>(`${APIRoute.Comments}/${currentId}`);
-      setComments(data);
-    } catch (error) {
-      toast.warn('Can not find comments');
-    }
-  };
-
-  if (offer === null || offer?.id !== Number(id)) {
-    getOffer();
-    getNearbyOffers();
-    getComments();
-  }
 
   if (offer !== null) {
     offersForMap = nearbyOffers.slice(0, 3).concat(offer);
   }
 
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(fetchFavoriteOffersAction());
+    }
+    if (offer === undefined || offer.id !== currentId) {
+      dispatch(fetchCurrentOfferAction(currentId));
+      dispatch(fetchNearbyOffersAction(currentId));
+    }
+  }, [currentId, dispatch, isAuth, offer]
+  );
+
   return (
     <div className="page">
-      <Header />
+      <Header count={favoriteCount} />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -87,8 +68,12 @@ function Realty(): JSX.Element {
                 <h1 className="property__name">
                   {offer?.title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
+                <button
+                  className={`property__bookmark-button ${offer?.isFavorite ? 'property__bookmark-button--active' : ''} button`}
+                  type="button"
+                  onClick={handleFavoriteButtonClick}
+                >
+                  <svg className="place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
@@ -140,9 +125,9 @@ function Realty(): JSX.Element {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <ReviewsList reviews={comments} />
+                <ReviewsList id={currentId} />
                 {
-                  isAuth && <ReviewForm setComments={setComments} />
+                  isAuth && <ReviewForm id={currentId} />
                 }
               </section>
             </div>
@@ -155,10 +140,10 @@ function Realty(): JSX.Element {
         </section>
         <div className="container">
           <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <h2 className="near-places__title">{nearbyOffers.length !== 0 ? 'Other places in the neighbourhood' : 'There are no neighbourhood offers'}</h2>
             <div className="near-places__list places__list">
               {
-                nearbyOffers ? <CardsList offers={nearbyOffers} cardClassName={CardClassName.Main} /> : ''
+                nearbyOffers ? <CardsList offers={nearbyOffers} pageType={PageType.Room} /> : ''
               }
             </div>
           </section>

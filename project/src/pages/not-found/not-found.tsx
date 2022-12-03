@@ -1,6 +1,7 @@
 import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
 import HeaderLogo from '../../components/header-logo/header-logo';
+import './not-found.css';
 
 function NotFound(): JSX.Element {
   return (
@@ -12,9 +13,9 @@ function NotFound(): JSX.Element {
           </div>
         </div>
       </div>
-      <div style={{ textAlign: 'center' }}>
-        <h1><span style={ {fontSize: '90px'}}>404</span><br></br>Страница не найдена!</h1>
-        <Link style={{ color: 'blue' }} to={AppRoute.Main}>Вернуться на главную</Link>
+      <div className="notFound">
+        <h1><span className="notFound__title">404</span><br></br>Страница не найдена!</h1>
+        <Link className="notFound__link" to={AppRoute.Main}>Вернуться на главную</Link>
       </div>
     </div>
   );

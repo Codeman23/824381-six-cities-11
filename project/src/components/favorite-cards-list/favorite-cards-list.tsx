@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import CardsList from '../cards-list/cards-list';
 import { Offer } from '../../types/offer';
-import { CardClassName, AppRoute } from '../../const';
+import { PageType, AppRoute } from '../../const';
 
 type FavoriteCardsListProps = {
   offers: Offer[];
@@ -19,7 +19,7 @@ function FavoriteCardsList( { offers, city }: FavoriteCardsListProps ): JSX.Elem
         </div>
       </div>
       <div className="favorites__places">
-        <CardsList offers={offers} cardClassName={CardClassName.Favorite} />
+        <CardsList offers={offers} pageType={PageType.Favorite} />
       </div>
     </li>
   );
