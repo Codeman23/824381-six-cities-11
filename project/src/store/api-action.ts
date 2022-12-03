@@ -7,7 +7,7 @@ import { FavoriteStatusData } from '../types/favorite-status-data';
 import { Offer } from '../types/offer';
 import { Review, ReviewData } from '../types/review';
 import { User } from '../types/user';
-import { APIRoute, AppRoute, UpdateType } from '../const';
+import { APIRoute, AppRoute } from '../const';
 import { dropUserData, saveUserData } from '../services/user-data';
 
 const fetchCurrentOfferAction = createAsyncThunk<Offer | undefined, number, {
