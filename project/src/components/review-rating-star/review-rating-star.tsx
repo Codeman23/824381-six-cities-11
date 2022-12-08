@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 
-type ReviewRatingStarsProps = {
+type ReviewRatingStarProps = {
   ratingStar: {
     title: string;
     value: number;
@@ -10,7 +10,7 @@ type ReviewRatingStarsProps = {
   formDisabled: boolean;
 }
 
-function ReviewRatingStars( {ratingStar, isChecked, fieldChangeHandle, formDisabled}: ReviewRatingStarsProps ): JSX.Element {
+function ReviewRatingStar( {ratingStar, isChecked, fieldChangeHandle, formDisabled}: ReviewRatingStarProps ): JSX.Element {
   const { title, value } = ratingStar;
   return (
     <>
@@ -31,4 +31,4 @@ function ReviewRatingStars( {ratingStar, isChecked, fieldChangeHandle, formDisab
   );
 }
 
-export default ReviewRatingStars;
+export default ReviewRatingStar;

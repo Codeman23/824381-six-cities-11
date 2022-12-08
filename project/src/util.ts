@@ -124,7 +124,6 @@ function getRandomNumber(min: number, max: number) {
  */
 const removeOffer = (offers: Offer[], currentOffer: Offer) => {
   const currenIndex = offers.findIndex((offer) => offer.id === currentOffer.id);
-
   const currentOffers = [
     ...offers.slice(0, currenIndex),
     currentOffer,

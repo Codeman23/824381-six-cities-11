@@ -1,7 +1,9 @@
+import './load.css';
+
 function Load(): JSX.Element {
   return (
-    <div>
-      <p>The page is loading ...</p>
+    <div className='load'>
+      <h2 className='load__text'>The page is loading ...</h2>
     </div>
   );
 }
