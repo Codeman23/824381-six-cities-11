@@ -1,0 +1,13 @@
+.load {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.load__text {
+  font-size: 18px;
+  font-weight: 700;
+  font-style: oblique;
+}

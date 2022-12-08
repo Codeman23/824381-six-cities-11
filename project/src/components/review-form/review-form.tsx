@@ -3,7 +3,7 @@ import { FormData } from '../../types/review';
 import { RatingData, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { setCommentAction } from '../../store/api-action';
-import ReviewRatingStars from '../../components/review-rating-star/review-rating-star';
+import ReviewRatingStar from '../../components/review-rating-star/review-rating-star';
 
 type ReviewFormProps = {
   id: number;
@@ -41,7 +41,7 @@ function ReviewForm({ id }: ReviewFormProps): JSX.Element {
       <div className="reviews__rating-form form__rating">
         {
           RatingData.map((data) =>
-            <ReviewRatingStars key={data.value} ratingStar={data} isChecked={data.value === Number(formData.rating)} formDisabled={formDisabled} fieldChangeHandle={fieldChangeHandle} />
+            <ReviewRatingStar key={data.value} ratingStar={data} isChecked={data.value === Number(formData.rating)} formDisabled={formDisabled} fieldChangeHandle={fieldChangeHandle} />
           )
         }
       </div>

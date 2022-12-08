@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCommentsAction } from '../../store/api-action';
