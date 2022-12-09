@@ -1,6 +1,5 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { fetchOffersAction } from '../../store/api-action';
 import { PageType, SortType } from '../../const';
 import { Offer } from '../../types/offer';
 import { getCity } from '../../store/app-action-process/selectors';
@@ -26,13 +25,6 @@ function Main(): JSX.Element {
   const currentOffers = getSortedOffers(sortedByCityOffers, activeSortItem);
 
   const isEmpty = currentOffers.length === 0;
-
-  useEffect(() => {
-    if (offers.length === 0) {
-      dispatch(fetchOffersAction());
-    }
-  }
-  );
 
   return (
     <div className="page page--gray page--main">
