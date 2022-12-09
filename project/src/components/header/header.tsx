@@ -42,7 +42,7 @@ function Header({ count }: HeaderProps): JSX.Element {
               {
                 isAuth() ?
                   <li className="header__nav-item">
-                    <Link className="header__nav-link" onClick={()=>{dispatch(logoutAction());}} to={AppRoute.Login}>
+                    <Link className="header__nav-link" onClick={()=>{dispatch(logoutAction());}} to={AppRoute.Main}>
                       <span className="header__signout">Sign out</span>
                     </Link>
                   </li> : ''

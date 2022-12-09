@@ -19,13 +19,13 @@ enum PageType {
 }
 
 enum MapIconSize {
-  Width = 40,
-  Height = 40
+  Width = 27,
+  Height = 39
 }
 
 enum MapIconPosition {
-  X = 20,
-  Y = 40
+  X = 13.5,
+  Y = 39
 }
 
 enum RaitingValues {

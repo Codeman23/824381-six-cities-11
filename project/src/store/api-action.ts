@@ -144,6 +144,7 @@ const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, { dispatch, extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropUserData();
+    dispatch(fetchOffersAction());
   },
 );
 
