@@ -12,4 +12,4 @@ const getComments = (state: State): Review[] => state[NameSpace.Data].comments;
 const getIsCommentLoading = (state: State): boolean => state[NameSpace.Data].loadedState.isCommentLoading;
 const getIsCommentLoadSuccess = (state: State): boolean => state[NameSpace.Data].loadedState.isCommentLoadSuccess;
 
-export { getOffer, getOffers, getOffersLoadingData, getFavoriteOffers, getNearbyOffers, getComments, getIsCommentLoading, getIsCommentLoadSuccess};
+export { getOffer, getOffers, getOffersLoadingData, getFavoriteOffers, getNearbyOffers, getComments, getIsCommentLoading, getIsCommentLoadSuccess };
