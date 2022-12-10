@@ -9,5 +9,7 @@ const getOffersLoadingData = (state: State): boolean => state[NameSpace.Data].lo
 const getFavoriteOffers = (state: State): Offer[] => state[NameSpace.Data].favoriteOffers;
 const getNearbyOffers = (state: State): Offer[] => state[NameSpace.Data].nearbyOffers;
 const getComments = (state: State): Review[] => state[NameSpace.Data].comments;
+const getIsCommentLoading = (state: State): boolean => state[NameSpace.Data].loadedState.isCommentLoading;
+const getIsCommentLoadSuccess = (state: State): boolean => state[NameSpace.Data].loadedState.isCommentLoadSuccess;
 
-export { getOffer, getOffers, getOffersLoadingData, getFavoriteOffers, getNearbyOffers, getComments };
+export { getOffer, getOffers, getOffersLoadingData, getFavoriteOffers, getNearbyOffers, getComments, getIsCommentLoading, getIsCommentLoadSuccess};

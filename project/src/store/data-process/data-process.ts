@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { DataProcess } from '../../types/state';
 import { removeOffer } from '../../util';
-import { updateComments, updateCurrentOffer, updateFavoriteOffers, updateNearbyOffers, updateOffers } from '../action';
-import { fetchCommentsAction, fetchCurrentOfferAction, fetchFavoriteOffersAction, fetchNearbyOffersAction, fetchOffersAction } from '../api-action';
+import { updateCurrentOffer, updateFavoriteOffers, updateNearbyOffers, updateOffers } from '../action';
+import { fetchCommentsAction, fetchCurrentOfferAction, fetchFavoriteOffersAction, fetchNearbyOffersAction, fetchOffersAction, setCommentAction } from '../api-action';
 
 const initialState: DataProcess = {
   currentOffer: undefined,
@@ -16,7 +16,9 @@ const initialState: DataProcess = {
     isOffersLoading: false,
     isOffersLoaded: false,
     isFavoritesLoaded: false,
-    isNearbyLoaded: false
+    isNearbyLoaded: false,
+    isCommentLoading: false,
+    isCommentLoadSuccess: false,
   },
 };
 
@@ -76,8 +78,18 @@ export const offersData = createSlice({
           state.currentOffer = action.payload;
         }
       })
-      .addCase(updateComments, (state, action) => {
+      .addCase(setCommentAction.pending, (state) => {
+        state.loadedState.isCommentLoading = true;
+        state.loadedState.isCommentLoadSuccess = false;
+      })
+      .addCase(setCommentAction.fulfilled, (state, action) => {
         state.comments = action.payload;
+        state.loadedState.isCommentLoading = false;
+        state.loadedState.isCommentLoadSuccess = true;
+      })
+      .addCase(setCommentAction.rejected, (state) => {
+        state.loadedState.isCommentLoading = false;
+        state.loadedState.isCommentLoadSuccess = false;
       });
   }
 });

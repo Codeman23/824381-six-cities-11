@@ -1,8 +1,9 @@
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import { FormData } from '../../types/review';
-import { RatingData, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
-import { useAppDispatch } from '../../hooks';
+import { RatingData, LengthComment } from '../../const';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import { setCommentAction } from '../../store/api-action';
+import { getIsCommentLoading, getIsCommentLoadSuccess } from '../../store/data-process/selectors';
 import ReviewRatingStar from '../../components/review-rating-star/review-rating-star';
 
 type ReviewFormProps = {
@@ -16,42 +17,46 @@ const defaultFormData = {
 
 function ReviewForm({ id }: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
-
-  const [formDisabled, setFormDisabled] = useState<boolean>(false);
+  const isCommentLoading = useAppSelector(getIsCommentLoading);
+  const isCommentLoadSuccess = useAppSelector(getIsCommentLoadSuccess);
   const [formData, setFormData] = useState<FormData>(defaultFormData);
 
-  const fieldChangeHandle = ({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  useEffect(() => {
+    if (isCommentLoadSuccess) {
+      setFormData(defaultFormData);
+    }
+  }, [isCommentLoadSuccess]);
+
+  const isValidForm = (LengthComment.Min < formData.comment.length && formData.comment.length < LengthComment.Max && formData.rating !== null && formData.rating > 0);
+  const isFormDisabled = !isValidForm || isCommentLoading;
+
+  const handleFormChange = ({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (evt: FormEvent) => {
+  const handleFormSubmit = (evt: FormEvent) => {
     evt.preventDefault();
-    setFormDisabled(true);
-    dispatch(setCommentAction({ id, formData }));
-    setFormData(defaultFormData);
-    setFormDisabled(false);
+    if (isValidForm) { dispatch(setCommentAction({ id, formData })); }
   };
 
-  useEffect(() => { setFormData(defaultFormData);}, [id]);
-
   return (
-    <form className="reviews__form form" action="" onSubmit={(evt) => {handleSubmit(evt);}}>
+    <form className="reviews__form form" action="" onSubmit={(evt) => {handleFormSubmit(evt);}}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
           RatingData.map((data) =>
-            <ReviewRatingStar key={data.value} ratingStar={data} isChecked={data.value === Number(formData.rating)} formDisabled={formDisabled} fieldChangeHandle={fieldChangeHandle} />
+            <ReviewRatingStar key={data.value} ratingStar={data} isChecked={data.value === Number(formData.rating)} formDisabled={isCommentLoading} handleFormChange={handleFormChange} />
           )
         }
       </div>
       <textarea className="reviews__textarea form__textarea"
         id="comment"
         name="comment"
-        maxLength={MAX_COMMENT_LENGTH}
+        maxLength={LengthComment.Max}
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={fieldChangeHandle}
-        disabled={formDisabled}
+        onChange={handleFormChange}
+        disabled={isCommentLoading}
         value={formData.comment}
       />
       <div className="reviews__button-wrapper">
@@ -61,7 +66,7 @@ function ReviewForm({ id }: ReviewFormProps): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={formData.comment.length < MIN_COMMENT_LENGTH || formData.rating === null || formDisabled}
+          disabled={isFormDisabled}
         >Submit
         </button>
       </div>
