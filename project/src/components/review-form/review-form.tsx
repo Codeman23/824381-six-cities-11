@@ -27,7 +27,7 @@ function ReviewForm({ id }: ReviewFormProps): JSX.Element {
     }
   }, [isCommentLoadSuccess]);
 
-  const isValidForm = (LengthComment.Min < formData.comment.length && formData.comment.length < LengthComment.Max && formData.rating !== null && formData.rating > 0);
+  const isValidForm = (LengthComment.Min < formData.comment.length && formData.comment.length < LengthComment.Max && formData.rating !== null);
   const isFormDisabled = !isValidForm || isCommentLoading;
 
   const handleFormChange = ({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {

@@ -122,4 +122,7 @@ const MAX_REVIEWS_COUNT = 10;
 
 const MAX_RANDOM_CITY = 5;
 
-export { AppRoute, AuthorizationStatus, PageType, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, NameSpace, FavoriteStatus, UpdateType, LengthComment, RatingData, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR, TIMEOUT_PASSWORD_ERROR, RE, MAX_REVIEWS_COUNT, MAX_RANDOM_CITY };
+const NEARBY_OFFERS_COUNT = 3;
+const REALTY_IMAGES_COUNT = 6;
+
+export { AppRoute, AuthorizationStatus, PageType, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, NameSpace, FavoriteStatus, UpdateType, LengthComment, RatingData, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR, TIMEOUT_PASSWORD_ERROR, RE, MAX_REVIEWS_COUNT, MAX_RANDOM_CITY, NEARBY_OFFERS_COUNT, REALTY_IMAGES_COUNT };

@@ -28,7 +28,7 @@ function Card( { offer, setActiveCard, updateType, pageType }: CardProps ): JSX.
     }
   };
 
-  const favoriteButtonClickHandle = () => {
+  const handleFavoriteButtonClick = () => {
     dispatch(setFavoriteStatusAction({
       currentId: id,
       status: isFavorite ? FavoriteStatus.NotFavorite : FavoriteStatus.Favorite,
@@ -57,7 +57,7 @@ function Card( { offer, setActiveCard, updateType, pageType }: CardProps ): JSX.
           <button
             className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
             type="button"
-            onClick={favoriteButtonClickHandle}
+            onClick={handleFavoriteButtonClick}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
