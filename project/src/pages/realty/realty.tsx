@@ -5,7 +5,7 @@ import { fetchCurrentOfferAction, fetchFavoriteOffersAction, fetchNearbyOffersAc
 import { getFavoriteOffers, getNearbyOffers, getOffer } from '../../store/data-process/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { convertRating } from '../../util';
-import { PageType, AuthorizationStatus, FavoriteStatus } from '../../const';
+import { PageType, AuthorizationStatus, FavoriteStatus, NEARBY_OFFERS_COUNT, REALTY_IMAGES_COUNT } from '../../const';
 import CardsList from '../../components/cards-list/cards-list';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
@@ -32,7 +32,7 @@ function Realty(): JSX.Element {
   };
 
   if (offer !== null) {
-    offersForMap = nearbyOffers.slice(0, 3).concat(offer);
+    offersForMap = nearbyOffers.slice(0, NEARBY_OFFERS_COUNT).concat(offer);
   }
 
   useEffect(() => {
@@ -54,7 +54,7 @@ function Realty(): JSX.Element {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {
-                offer?.images.slice(0, 6).map((img) =><RoomImage key={img} imageUrl={img} alt={offer.type} />)
+                offer?.images.slice(0, REALTY_IMAGES_COUNT).map((img) =><RoomImage key={img} imageUrl={img} alt={offer.type} />)
               }
             </div>
           </div>

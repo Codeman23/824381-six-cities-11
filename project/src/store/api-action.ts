@@ -99,7 +99,7 @@ const fetchCommentsAction = createAsyncThunk<Review[], number, {
   }
 );
 
-const setCommentAction = createAsyncThunk<void, ReviewData, {
+const setCommentAction = createAsyncThunk<Review[], ReviewData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -108,6 +108,7 @@ const setCommentAction = createAsyncThunk<void, ReviewData, {
   async ({ id, formData }, { dispatch, extra: api }) => {
     const { data } = await api.post<Review[]>(`${APIRoute.Comments}/${id}`, formData);
     dispatch(updateComments(data));
+    return data;
   },
 );
 
@@ -144,6 +145,7 @@ const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, { dispatch, extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropUserData();
+    dispatch(fetchOffersAction());
   },
 );
 

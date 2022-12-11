@@ -23,6 +23,8 @@ type DataProcess = {
     isOffersLoaded: boolean;
     isFavoritesLoaded: boolean;
     isNearbyLoaded: boolean;
+    isCommentLoading: boolean;
+    isCommentLoadSuccess: boolean;
   };
 };
 

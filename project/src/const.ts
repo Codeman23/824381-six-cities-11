@@ -19,13 +19,13 @@ enum PageType {
 }
 
 enum MapIconSize {
-  Width = 40,
-  Height = 40
+  Width = 27,
+  Height = 39
 }
 
 enum MapIconPosition {
-  X = 20,
-  Y = 40
+  X = 13.5,
+  Y = 39
 }
 
 enum RaitingValues {
@@ -79,6 +79,11 @@ enum UpdateType {
   Nearby = 'NEARBY'
 }
 
+enum LengthComment {
+  Min = 50,
+  Max = 300
+}
+
 const RatingData = [
   {
     title: 'perfect',
@@ -115,9 +120,9 @@ const RE = /^(?=.*[A-Za-z])(?=.*[0-9]).{2,}$/;
 
 const MAX_REVIEWS_COUNT = 10;
 
-const MIN_COMMENT_LENGTH = 50;
-const MAX_COMMENT_LENGTH = 300;
-
 const MAX_RANDOM_CITY = 5;
 
-export { AppRoute, AuthorizationStatus, PageType, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, NameSpace, FavoriteStatus, UpdateType, RatingData, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR, TIMEOUT_PASSWORD_ERROR, RE, MAX_REVIEWS_COUNT, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, MAX_RANDOM_CITY };
+const NEARBY_OFFERS_COUNT = 3;
+const REALTY_IMAGES_COUNT = 6;
+
+export { AppRoute, AuthorizationStatus, PageType, MapIconSize, MapIconPosition, RaitingValues, CityType, SortType, APIRoute, StatusCode, NameSpace, FavoriteStatus, UpdateType, LengthComment, RatingData, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, INSTANCE_LAYER, LAYER_ATTRIBUTION, DATE_FORMAT, TIMEOUT_ERROR, TIMEOUT_PASSWORD_ERROR, RE, MAX_REVIEWS_COUNT, MAX_RANDOM_CITY, NEARBY_OFFERS_COUNT, REALTY_IMAGES_COUNT };

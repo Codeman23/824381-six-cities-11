@@ -28,7 +28,7 @@ const groupBy = <T>(array: T[], predicate: (value: T, index: number, array: T[])
  * @param raiting - raiting number
  * @returns - number value for css width property
  */
-const convertRating = (raiting:number) : number => raiting * RaitingValues.MaxValue / RaitingValues.MaxStars;
+const convertRating = (raiting:number) : number => Math.round(raiting) * RaitingValues.MaxValue / RaitingValues.MaxStars;
 
 /**
  *  Function that putt items with no data to the end of the list
@@ -83,13 +83,13 @@ const sortTopRated = (offerA: Offer, offerB: Offer) => {
  * @returns - sorted items
  */
 const getSortedOffers = (offers: Offer[], sortType: string) => {
-  let sortedOffers;
+  let sortedOffers = offers.slice();
   switch (sortType) {
-    case SortType.LowToHigh: sortedOffers = offers.sort(sortLowToHigh);
+    case SortType.LowToHigh: sortedOffers = sortedOffers.sort(sortLowToHigh);
       break;
-    case SortType.HighToLow: sortedOffers = offers.sort(sortHighToLow);
+    case SortType.HighToLow: sortedOffers = sortedOffers.sort(sortHighToLow);
       break;
-    case SortType.TopRated: sortedOffers = offers.sort(sortTopRated);
+    case SortType.TopRated: sortedOffers = sortedOffers.sort(sortTopRated);
       break;
     default: sortedOffers = offers;
   }

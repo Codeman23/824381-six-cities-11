@@ -6,11 +6,11 @@ type ReviewRatingStarProps = {
     value: number;
   };
   isChecked: boolean;
-  fieldChangeHandle: ({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  handleFormChange: ({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   formDisabled: boolean;
 }
 
-function ReviewRatingStar( {ratingStar, isChecked, fieldChangeHandle, formDisabled}: ReviewRatingStarProps ): JSX.Element {
+function ReviewRatingStar( {ratingStar, isChecked, handleFormChange, formDisabled}: ReviewRatingStarProps ): JSX.Element {
   const { title, value } = ratingStar;
   return (
     <>
@@ -19,8 +19,9 @@ function ReviewRatingStar( {ratingStar, isChecked, fieldChangeHandle, formDisabl
         value={value}
         id={`${value}-stars`}
         type="radio"
-        onChange={fieldChangeHandle}
+        onChange={handleFormChange}
         checked={isChecked}
+        disabled ={formDisabled}
       />
       <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
         <svg className="form__star-image" width="37" height="33">

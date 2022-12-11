@@ -1,17 +1,21 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { Offer } from '../../types/offer';
+import { getSortedOffers } from '../../util';
 import Card from '../card/card';
 
 type CardsListProps = {
   offers: Offer[];
+  activeSortItem?: string;
   pageType: string;
   setActiveCard?: ((offer: Offer | undefined) => void) | undefined;
 }
 
-function CardsList({ offers, pageType, setActiveCard }: CardsListProps): JSX.Element {
+function CardsList({ offers, activeSortItem, pageType, setActiveCard }: CardsListProps): JSX.Element {
+  const sortedOffers = useMemo(() => getSortedOffers(offers, activeSortItem || ''), [offers, activeSortItem]);
+
   return (
     <>
-      {offers.map((offer: Offer) => <Card key={offer.id} offer={offer} setActiveCard={setActiveCard} pageType={pageType} />)}
+      {sortedOffers.map((offer: Offer) => <Card key={offer.id} offer={offer} setActiveCard={setActiveCard} pageType={pageType} />)}
     </>
   );
 }
