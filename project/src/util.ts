@@ -24,14 +24,14 @@ const groupBy = <T>(array: T[], predicate: (value: T, index: number, array: T[])
   }, {} as { [key: string]: T[] });
 
 /**
- * Helper function that conver rating to css width property value
+ * Helper function that convert rating to css width property value
  * @param raiting - raiting number
  * @returns - number value for css width property
  */
 const convertRating = (raiting:number) : number => Math.round(raiting) * RaitingValues.MaxValue / RaitingValues.MaxStars;
 
 /**
- *  Function that putt items with no data to the end of the list
+ *  Function that put items with no data to the end of the list
  * @param itemA - item data
  * @param itemB - item data
  * @returns - sorted items
